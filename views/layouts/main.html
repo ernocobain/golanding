@@ -1,0 +1,53 @@
+<!-- views/layouts/main.html -->
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{ .Title }}</title>
+  <link rel="stylesheet" href="/css/style.css" />
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const sections = document.querySelectorAll(".lazy-section");
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const cssFile = entry.target.getAttribute("data-css");
+            loadCSS(cssFile);
+            observer.unobserve(entry.target); // Berhenti observasi setelah CSS dimuat
+          }
+        });
+      }, {
+        rootMargin: "200px" // Memuat CSS 200px sebelum section masuk viewport
+      });
+
+      sections.forEach(section => observer.observe(section));
+    });
+
+    // Fungsi untuk memuat CSS dinamis
+    function loadCSS(href) {
+      if (!document.querySelector(`link[href="${href}"]`)) {
+        const link = document.createElement("link");
+        link.rel = "stylesheet";
+        link.href = href;
+        document.head.appendChild(link);
+      }
+    }
+  </script>
+</head>
+
+<body class="font-sans bg-white text-gray-900">
+  {{ template "partials/header" }}
+
+  <main>
+    {{ embed }}
+  </main>
+
+  {{ template "partials/footer" }}
+
+</body>
+
+</html>

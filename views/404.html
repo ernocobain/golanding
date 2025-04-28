@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <style>
+        .notfound {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            color: #333;
+        }
+
+        .container {
+            text-align: center;
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .error-code {
+            font-size: 10rem;
+            font-weight: bold;
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .error-message {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .error-description {
+            font-size: 1rem;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .home-button {
+            background-color: #3498db;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+    <div class="notfound">
+        <div class="container">
+            <div class="error-code">404</div>
+            <div class="error-message">Oops! Page not found.</div>
+            <div class="error-description">
+                We're sorry, but the page you requested could not be found.
+                <br>
+                It might have been moved or deleted.
+            </div>
+            <a href="/" class="home-button">Go back to Home</a>
+        </div>
+    </div>
+</body>
+
+</html>

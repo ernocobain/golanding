@@ -1,0 +1,167 @@
+/* Gaya untuk bagian layanan */
+.services-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.services-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.services-section .section-subtitle {
+    font-size: 1.1em;
+    color: #7f8c8d;
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.service-container {
+    display: flex;
+    flex-wrap: wrap;
+    /* Agar item pindah ke baris baru jika tidak muat */
+    gap: 30px;
+    /* Jarak antar item */
+    justify-content: center;
+    /* Pusatkan item jika ada ruang tersisa */
+}
+
+.service-item {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    text-align: left;
+    flex: 1 1 300px;
+    /* flex-grow, flex-shrink, flex-basis */
+    max-width: 350px;
+    /* Batas lebar maksimum */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    /* Susun konten secara vertikal */
+}
+
+.service-item:hover {
+    transform: translateY(-10px);
+    /* Efek mengangkat saat di-hover */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.service-icon {
+    font-size: 2.5em;
+    /* Ukuran ikon placeholder */
+    margin-bottom: 20px;
+    color: #3498db;
+    /* Warna ikon */
+    height: 60px;
+    width: 60px;
+    background-color: #eaf4fc;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: flex-start;
+    /* Rata kiri ikon */
+}
+
+/* Placeholder ikon sederhana - ganti dengan ikon asli jika ada */
+.service-icon::before {
+    content: '★';
+    /* Contoh ikon bintang */
+    /* Jika menggunakan Font Awesome: content: '\f005'; font-family: 'Font Awesome 5 Free'; font-weight: 900; */
+}
+
+
+.service-item h3 {
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #2c3e50;
+}
+
+.service-item p {
+    font-size: 0.95em;
+    color: #555;
+    flex-grow: 1;
+    /* Pastikan paragraf mengisi ruang tersisa */
+    margin-bottom: 20px;
+    /* Jarak sebelum tombol (jika ada) */
+}
+
+.service-item .cta-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #3498db;
+    color: #ffffff;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    align-self: flex-start;
+    /* Rata kiri tombol */
+}
+
+.service-item .cta-button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsif untuk layar kecil */
+@media (max-width: 768px) {
+    .services-section h2 {
+        font-size: 2em;
+    }
+
+    .service-container {
+        flex-direction: column;
+        /* Susun item secara vertikal */
+        align-items: center;
+        /* Pusatkan item */
+        gap: 20px;
+    }
+
+    .service-item {
+        flex-basis: auto;
+        /* Biarkan lebar otomatis */
+        width: 90%;
+        /* Lebar item di layar kecil */
+        max-width: 400px;
+        /* Batas lebar */
+        text-align: center;
+        /* Pusatkan teks di layar kecil */
+    }
+
+    .service-icon,
+    .service-item .cta-button {
+        align-self: center;
+        /* Pusatkan ikon dan tombol */
+    }
+}
+
+@media (max-width: 480px) {
+    .services-section {
+        padding: 40px 0;
+    }
+
+    .services-section h2 {
+        font-size: 1.8em;
+    }
+
+    .services-section .section-subtitle {
+        font-size: 1em;
+    }
+
+    .service-item {
+        padding: 20px;
+    }
+
+    .service-item h3 {
+        font-size: 1.2em;
+    }
+
+    .service-item p {
+        font-size: 0.9em;
+    }
+}
