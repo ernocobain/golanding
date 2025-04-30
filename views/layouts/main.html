@@ -40,13 +40,13 @@
 </head>
 
 <body class="font-sans bg-white text-gray-900">
-  {{ template "partials/header" }}
+  {{ template "partials/header" .}}
 
   <main>
     {{ embed }}
   </main>
 
-  {{ template "partials/footer" }}
+  {{ template "partials/footer" .}}
 
 </body>
 

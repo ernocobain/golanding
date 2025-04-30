@@ -346,3 +346,40 @@ nav>button {
     text-align: center;
   }
 }
+
+/* --- Gaya Spesifik Footer --- */
+
+.site-footer {
+  background-color: #333; /* Warna latar belakang gelap */
+  color: #fff;           /* Warna teks terang */
+  padding: 20px 0;      /* Padding vertikal (atas & bawah 20px, kiri & kanan 0) */
+  text-align: center;     /* Teks rata tengah */
+  width: 100%;          /* Pastikan lebar penuh */
+  /* margin-top: auto;   /* Anda mungkin masih memerlukan ini jika TIDAK menggunakan flexbox di body untuk mendorong footer ke bawah */
+  /* flex-shrink: 0;     /* Hanya relevan jika body adalah flex container */
+}
+
+.footer-content {
+  max-width: 960px;     /* Batasi lebar konten agar tidak terlalu lebar di layar besar */
+  margin: 0 auto;       /* Pusatkan .footer-content secara horizontal di dalam .site-footer */
+  padding: 0 15px;      /* Beri sedikit ruang di sisi kiri dan kanan konten */
+}
+
+.site-footer p {
+  margin: 0 0 10px 0;   /* Margin bawah 10px untuk paragraf hak cipta */
+  font-size: 0.9em;     /* Ukuran font sedikit lebih kecil dari default */
+}
+
+.footer-nav a {
+  color: #aaa;           /* Warna link abu-abu terang */
+  text-decoration: none;  /* Hapus garis bawah default */
+  margin: 0 5px;        /* Beri jarak horizontal 5px di setiap sisi link */
+  font-size: 0.9em;     /* Ukuran font sedikit lebih kecil */
+  transition: color 0.2s ease; /* Efek transisi halus saat warna berubah */
+}
+
+.footer-nav a:hover {
+  color: #fff;           /* Ubah warna link menjadi putih saat kursor di atasnya */
+  text-decoration: underline; /* Tambahkan garis bawah saat kursor di atasnya */
+}
+
