@@ -1,167 +1,123 @@
-/* Gaya untuk bagian layanan */
+/* Ganti seluruh CSS services.css Anda dengan ini */
+
+/* -- Bagian Layanan (Versi Revisi) -- */
 .services-section {
-    padding: 60px 0;
+    padding: 80px 0;
     text-align: center;
+    background-color: var(--white); /* Gunakan putih bersih atau --background-light */
 }
 
 .services-section h2 {
-    font-size: 2.5em;
+    font-size: 2.5rem;
+    font-weight: 700;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: var(--text-dark); /* Gunakan variabel warna */
 }
 
 .services-section .section-subtitle {
-    font-size: 1.1em;
-    color: #7f8c8d;
-    margin-bottom: 40px;
+    font-size: 1.1rem;
+    color: var(--text-subtle); /* Gunakan variabel warna */
+    margin-bottom: 50px;
     max-width: 600px;
     margin-left: auto;
     margin-right: auto;
+    line-height: 1.6;
 }
 
 .service-container {
     display: flex;
     flex-wrap: wrap;
-    /* Agar item pindah ke baris baru jika tidak muat */
     gap: 30px;
-    /* Jarak antar item */
     justify-content: center;
-    /* Pusatkan item jika ada ruang tersisa */
 }
 
 .service-item {
-    background-color: #ffffff;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background-color: var(--white);
+    border-radius: 12px; /* Buat sudut lebih lembut */
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07); /* Bayangan lebih halus */
     padding: 30px;
     text-align: left;
     flex: 1 1 300px;
-    /* flex-grow, flex-shrink, flex-basis */
     max-width: 350px;
-    /* Batas lebar maksimum */
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
-    /* Susun konten secara vertikal */
+    border-top: 4px solid var(--primary-orange); /* Aksen warna brand! */
 }
 
 .service-item:hover {
-    transform: translateY(-10px);
-    /* Efek mengangkat saat di-hover */
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 .service-icon {
-    font-size: 2.5em;
-    /* Ukuran ikon placeholder */
     margin-bottom: 20px;
-    color: #3498db;
-    /* Warna ikon */
     height: 60px;
     width: 60px;
-    background-color: #eaf4fc;
+    background-color: #FFF7ED; /* Warna oranye sangat pucat */
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     align-self: flex-start;
-    /* Rata kiri ikon */
 }
 
-/* Placeholder ikon sederhana - ganti dengan ikon asli jika ada */
-.service-icon::before {
-    content: '★';
-    /* Contoh ikon bintang */
-    /* Jika menggunakan Font Awesome: content: '\f005'; font-family: 'Font Awesome 5 Free'; font-weight: 900; */
+.service-icon svg {
+    color: var(--primary-orange); /* Warna ikonnya */
+    width: 28px; /* Sesuaikan ukuran ikon SVG */
+    height: 28px;
 }
-
 
 .service-item h3 {
-    font-size: 1.4em;
+    font-size: 1.4rem;
     margin-top: 0;
     margin-bottom: 15px;
-    color: #2c3e50;
+    color: var(--text-dark);
 }
 
 .service-item p {
-    font-size: 0.95em;
-    color: #555;
-    flex-grow: 1;
-    /* Pastikan paragraf mengisi ruang tersisa */
-    margin-bottom: 20px;
-    /* Jarak sebelum tombol (jika ada) */
+    font-size: 1rem;
+    color: var(--text-subtle);
+    flex-grow: 1; /* Pastikan paragraf mengisi ruang */
+    margin-bottom: 25px;
+    line-height: 1.6;
 }
 
+/* Menggunakan kembali style tombol dari hero section untuk konsistensi */
 .service-item .cta-button {
-    display: inline-block;
     padding: 10px 20px;
-    background-color: #3498db;
-    color: #ffffff;
+    border-radius: 50px;
+    font-weight: 600;
     text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: all 0.3s ease;
     align-self: flex-start;
-    /* Rata kiri tombol */
 }
 
-.service-item .cta-button:hover {
-    background-color: #2980b9;
+.service-item .cta-button.secondary {
+    background-color: transparent;
+    color: var(--primary-orange);
+    border: 2px solid var(--primary-orange);
 }
 
-/* Responsif untuk layar kecil */
+.service-item .cta-button.secondary:hover {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    transform: translateY(-2px);
+}
+
+
+/* --- Bagian Responsif (Sudah bagus, hanya sedikit penyesuaian) --- */
 @media (max-width: 768px) {
     .services-section h2 {
-        font-size: 2em;
+        font-size: 2rem;
     }
-
     .service-container {
         flex-direction: column;
-        /* Susun item secara vertikal */
         align-items: center;
-        /* Pusatkan item */
-        gap: 20px;
+        gap: 25px;
     }
-
     .service-item {
-        flex-basis: auto;
-        /* Biarkan lebar otomatis */
         width: 90%;
-        /* Lebar item di layar kecil */
         max-width: 400px;
-        /* Batas lebar */
-        text-align: center;
-        /* Pusatkan teks di layar kecil */
-    }
-
-    .service-icon,
-    .service-item .cta-button {
-        align-self: center;
-        /* Pusatkan ikon dan tombol */
-    }
-}
-
-@media (max-width: 480px) {
-    .services-section {
-        padding: 40px 0;
-    }
-
-    .services-section h2 {
-        font-size: 1.8em;
-    }
-
-    .services-section .section-subtitle {
-        font-size: 1em;
-    }
-
-    .service-item {
-        padding: 20px;
-    }
-
-    .service-item h3 {
-        font-size: 1.2em;
-    }
-
-    .service-item p {
-        font-size: 0.9em;
     }
 }

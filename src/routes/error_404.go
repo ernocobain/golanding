@@ -12,6 +12,6 @@ func Erorr404(app *fiber.App) {
 		return c.Status(404).Render("404", fiber.Map{
 			"Title": "404 Not Found",
 			"Year":  time.Now().Year(),
-		}, "layouts/main") // Render the 404 template
+		})
 	})
 }

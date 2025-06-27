@@ -1,144 +1,25 @@
 <header class="header">
   <div class="header-container">
-    <h1 class="logo">MauNguli</h1>
+    <a href="/" class="logo">
+      <img src="/static/images/logo-maunguli.png" alt="Logo Maunguli">
+    </a>
 
-    <!-- Hamburger Menu -->
-    <div class="burger" id="burger">
-      {{template "components/vector/hamburger"}}
-    </div>
-
-    <!-- Sidebar Drawer -->
-    <div class="overlay" id="overlay"></div>
-    <nav id="sidebar">
-      <button class="close-btn" id="close-btn" aria-label="Close menu">×</button>
+    <nav class="nav" id="main-nav">
       <ul class="nav-list">
-        <li><a href="#services">Layanan</a></li>
-        <li><a href="#about">Tentang</a></li>
-        <li><a href="#contact">Kontak</a></li>
-        <li><a href="https://blog.maunguli.com">Blog</a></li> <!-- Perbaikan: URL dan teks berbeda -->
+        <li class="nav-item"><a href="/">Beranda</a></li>
+        <li class="nav-item"><a href="/services">Layanan</a></li>
+        <li class="nav-item"><a href="/about">Tentang</a></li>
+        <li class="nav-item"><a href="/contact">Kontak</a></li>
+        <li><a href="https://blog.maunguli.com" target="_blank" rel="noopener noreferrer">Blog</a></li>
       </ul>
     </nav>
+
+    <button class="burger" id="burger-button" aria-label="Buka menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </header>
 
-<script>
-  const listMenu = document.querySelectorAll("nav ul li a"); // Pilih elemen <a> di dalam <li>
-  const mediaQuery = window.matchMedia("(max-width: 768px)");
-  const burger = document.getElementById("burger");
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.getElementById("overlay");
-  const closeBtn = document.getElementById("close-btn");
-
-  function toggleMenu(active) {
-    // Gunakan argumen 'active' untuk secara eksplisit mengatur state
-    // atau toggle jika tidak ada argumen yang diberikan (meskipun kita selalu memberikannya di sini)
-    const force = typeof active === 'boolean' ? active : !sidebar.classList.contains("active");
-    burger.classList.toggle("active", force);
-    sidebar.classList.toggle("active", force);
-    overlay.classList.toggle("active", force);
-
-    // Tambahkan/hapus class 'no-scroll' pada body untuk mencegah scrolling saat sidebar terbuka
-    document.body.classList.toggle('no-scroll', force);
-  }
-
-  // Handle hamburger and close button
-  burger.addEventListener("click", (e) => {
-      e.stopPropagation(); // Hentikan event agar tidak langsung ditangkap oleh overlay/document
-      toggleMenu(true);
-  });
-  closeBtn.addEventListener("click", () => toggleMenu(false));
-  overlay.addEventListener("click", () => toggleMenu(false));
-
-  // Tambahkan event listener untuk setiap link menu di sidebar
-  listMenu.forEach(item => {
-    item.addEventListener("click", () => {
-      // Hanya tutup jika sidebar sedang aktif (terlihat di mobile)
-      if (sidebar.classList.contains("active")) {
-        toggleMenu(false);
-      }
-      // Biarkan perilaku default link (navigasi ke anchor) tetap berjalan
-    });
-  });
-
-
-  // --- Kode untuk handleViewportChange dan IntersectionObserver tetap sama ---
-
-  function handleViewportChange(e) {
-    const nav = document.querySelector("nav"); // Sebaiknya gunakan ID jika memungkinkan: const nav = document.getElementById("sidebar");
-
-    if (e.matches) {
-      // Mobile view - Pastikan class sidebar ada jika belum
-      if (!nav.classList.contains("sidebar")) {
-          nav.classList.add("sidebar");
-      }
-      // Jika sidebar terbuka saat resize ke mobile, biarkan terbuka
-    } else {
-      // Desktop view - Hapus class sidebar
-      nav.classList.remove("sidebar");
-      // Pastikan menu tertutup saat beralih ke desktop
-      toggleMenu(false);
-    }
-  }
-
-  // Jalankan sekali saat halaman dimuat
-  handleViewportChange(mediaQuery);
-
-  // Gunakan addEventListener yang lebih modern daripada addListener
-  mediaQuery.addEventListener('change', handleViewportChange);
-
-  // Lazy loading CSS (Kode ini sudah bagus)
-  document.addEventListener("DOMContentLoaded", () => {
-    const sections = document.querySelectorAll(".lazy-section");
-    if (sections.length === 0) return; // Keluar jika tidak ada section lazy
-
-    // Pastikan IntersectionObserver didukung
-    if (!('IntersectionObserver' in window)) {
-        console.warn("IntersectionObserver tidak didukung, memuat semua CSS.");
-        sections.forEach(section => {
-            const cssFile = section.getAttribute("data-css");
-            if (cssFile) loadCSS(cssFile);
-        });
-        return;
-    }
-
-
-    const observer = new IntersectionObserver((entries, obs) => { // Ganti nama variabel observer internal
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const cssFile = entry.target.getAttribute("data-css");
-          if (cssFile) { // Pastikan ada data-css
-             loadCSS(cssFile);
-          }
-          obs.unobserve(entry.target); // Berhenti observasi setelah CSS dimuat atau jika tidak ada cssFile
-        }
-      });
-    }, {
-      rootMargin: "200px 0px 200px 0px" // Lebih spesifik untuk vertical margin
-    });
-
-    sections.forEach(section => observer.observe(section));
-  });
-
-  // Fungsi untuk memuat CSS dinamis
-  function loadCSS(href) {
-    // Cek apakah link sudah ada
-    if (!document.querySelector(`link[rel="stylesheet"][href="${href}"]`)) {
-      const link = document.createElement("link");
-      link.rel = "stylesheet";
-      link.href = href;
-      // Pertimbangkan menambahkan link sebelum script terakhir untuk performa
-      document.head.appendChild(link);
-      console.log(`CSS loaded: ${href}`); // Optional: logging
-    }
-  }
-
-  // Tambahkan style untuk mencegah scroll saat sidebar aktif
-  const style = document.createElement('style');
-  style.textContent = `
-    body.no-scroll {
-      overflow: hidden;
-    }
-  `;
-  document.head.appendChild(style);
-
-</script>
+<div class="nav-overlay" id="nav-overlay"></div>

@@ -1,69 +1,118 @@
+/* Ganti seluruh CSS testimonials.css Anda dengan ini */
+
+/* -- Bagian Testimoni (Versi Revisi) -- */
 #testimonials {
-    background-color: #f8f8f8;
-    padding: 60px 20px;
+    background-color: var(--background-light); /* Gunakan variabel background */
+    padding: 80px 1rem;
     text-align: center;
-  }
-  
-  #testimonials h2 {
-    margin-bottom: 40px;
+}
+
+#testimonials h2 {
     font-size: 2.5rem;
-    color: #333;
-  }
-  
-  .testimonial-slider {
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* Menambahkan style untuk subjudul, sama seperti bagian lain */
+#testimonials .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-subtle);
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+
+.testimonial-slider {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 30px;
-  }
-  
-  .testimonial {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+}
+
+/* Kartu Testimoni */
+.testimonial {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.07);
+    padding: 35px;
     max-width: 400px;
     width: 100%;
     text-align: left;
-  }
-  
-  .testimonial-content {
-    margin-bottom: 20px;
-  }
-  
-  .testimonial-content p {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: #555;
-  }
-  
-  .testimonial-author {
+    position: relative; /* Diperlukan untuk positioning ikon kutip */
+    border: 1px solid #e2e8f0; /* Border halus */
+}
+
+.testimonial-content {
+margin-bottom: 25px;
+position: relative;
+z-index: 2;
+padding-left: 40px; /* Beri ruang di kiri untuk ikon */
+}
+
+/* --- Ikon Tanda Kutip --- */
+.quote-icon {
+position: absolute;
+top: 10px; 
+left: 10px;
+z-index: 1;
+}
+
+.quote-icon svg {
+width: 30px; 
+height: 30px; 
+color: #f0f3f6; 
+opacity: 0.7; 
+}
+
+
+
+.testimonial-content p {
+    font-size: 1.05rem; /* Sedikit perbesar agar lebih terbaca */
+    line-height: 1.7;
+    color: var(--text-subtle);
+    font-style: italic; /* Buat teks kutipan menjadi miring */
+}
+
+/* Author Info */
+.testimonial-author {
     display: flex;
     align-items: center;
-  }
-  
-  .testimonial-avatar {
+    border-top: 1px solid #e2e8f0; /* Garis pemisah */
+    padding-top: 20px;
+}
+
+.testimonial-avatar {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     margin-right: 15px;
-  }
-  
-  .author-info h3 {
+    object-fit: cover;
+}
+
+.author-info h3 {
     font-size: 1.1rem;
-    color: #333;
-    margin: 0;
-  }
-  
-  .author-info p {
+    font-weight: 600;
+    color: var(--text-dark);
+    margin: 0 0 4px 0;
+}
+
+.author-info p {
     font-size: 0.9rem;
-    color: #777;
+    color: var(--primary-orange); /* Beri aksen warna brand! */
     margin: 0;
-  }
-  
-  @media (max-width: 768px) {
-    .testimonial {
-      max-width: 100%;
+    font-weight: 500;
+}
+
+/* --- Bagian Responsif --- */
+@media (max-width: 768px) {
+    #testimonials h2 {
+        font-size: 2rem;
     }
-  }
-  
+    .testimonial {
+        max-width: 100%;
+    }
+}

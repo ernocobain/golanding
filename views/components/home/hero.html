@@ -1,42 +1,18 @@
-<!-- Hero Section -->
 <section class="hero" id="home">
-  <div class="hero-container">
-      <div class="hero-content">
-          <h1 class="hero-title">Maunguli</h1>
-          <p class="hero-subtitle">Solusi Terbaik untuk Kebutuhan Anda</p>
-          <div class="hero-cta">
-              <a href="#produk" class="cta-button">Lihat Produk</a>
-              <a href="#kontak" class="cta-button secondary">Hubungi Kami</a>
-          </div>
-      </div>
-      <div class="hero-image">
-          <img src="https://placehold.co/600x400" alt="Maunguli hero image"  width="600px" height="400px">
-      </div>
-  </div>
-  
-  <div id="hero-scroll-indicator" class="hero-scroll-indicator">
-      <span class="scroll-text">Scroll untuk menjelajahi</span>
-      <div class="scroll-icon"></div>
-  </div>
+    <div class="hero-container">
+        <div class="hero-content">
+            <h1 class="hero-title">Wujudkan Bangunan Impian Anda</h1>
+            <p class="hero-subtitle">Dari pondasi hingga finishing, kami menyediakan jasa tukang profesional untuk
+                renovasi, bangun baru, dan perbaikan dengan hasil yang rapi dan terpercaya.</p>
+            <div class="hero-cta">
+                <a href="#services" class="cta-button primary">Lihat Layanan Kami</a>
+                <a href="#contact" class="cta-button secondary">Konsultasi Gratis</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="hero-scroll-indicator" class="hero-scroll-indicator">
+        <span class="scroll-text">Scroll ke Bawah</span>
+        <div class="scroll-icon"></div>
+    </div>
 </section>
-
-<script>
-    let positionScrollIndicator = 200
-    let ticking = false 
-    let heroScroll = document.querySelector("#hero-scroll-indicator")
-
-    function scrollremoveEvent(e) {
-        
-    }
-
-    addEventListener("scroll", (e)=>{
-        let scrollY = window.scrollY
-        if (scrollY > positionScrollIndicator) {
-            heroScroll.classList.remove("hero-scroll-indicator")
-            heroScroll.classList.add("hidden")
-        } else {
-            heroScroll.classList.add("hero-scroll-indicator")
-            heroScroll.classList.remove("hidden")
-        }
-    })
-</script>
