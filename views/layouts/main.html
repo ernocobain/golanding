@@ -7,8 +7,8 @@
   <title>{{ .Title }}</title>
   <link rel="stylesheet" href="/static/css/style.css" />
   <link rel="icon" href="/static/pavicon.ico" type="image/x-icon" />
-  
-  </head>
+
+</head>
 
 <body>
 
@@ -16,13 +16,20 @@
 
     {{ template "partials/header" .}}
 
-    <main>
+    {{/* Cek apakah ada variabel PageCSS yang dikirim dari handler Go */}}
+    {{ if .PageCSS }}
+    <div class="lazy-section" data-css="{{ .PageCSS }}">
       {{ embed }}
-    </main>
+    </div>
+    {{ else }}
+    {{ embed }}
+    {{ end }}
 
     {{ template "partials/footer" .}}
 
-  </div> <script src="/static/js/index.js"></script>
+  </div>
+  <script src="/static/js/index.js"></script>
 
 </body>
+
 </html>

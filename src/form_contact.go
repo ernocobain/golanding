@@ -1,41 +1,62 @@
+// /src/form_contact.go (VERSI BARU - TELEGRAM)
 package src
 
 import (
 	"fmt"
+	"net/http"
+	"net/url"
+	"os"
+	"strings"
 
 	"github.com/gofiber/fiber/v2"
 )
 
-func FormContact(app *fiber.App) {
-	// --- Handler untuk Menerima Data Form Kontak ---
-	app.Post("/contact", func(c *fiber.Ctx) error {
-		// 1. Ambil data dari form menggunakan atribut 'name'
-		name := c.FormValue("name")
-		email := c.FormValue("email")
-		message := c.FormValue("message")
+func sendMessageHandler(c *fiber.Ctx) error {
+	// Ambil data dari form
+	name := c.FormValue("name")
+	email := c.FormValue("email")
+	subject := c.FormValue("subject")
+	message := c.FormValue("message")
 
-		// 2. (Contoh) Cetak data ke konsol server
-		fmt.Printf("Pesan Diterima:\n Nama: %s\n Email: %s\n Pesan: %s\n", name, email, message)
+	// Ambil konfigurasi Telegram dari environment variables
+	botToken := os.Getenv("TELEGRAM_BOT_TOKEN")
+	chatID := os.Getenv("TELEGRAM_CHAT_ID")
 
-		// 3. (Penting) Lakukan sesuatu dengan data ini!
-		//    - Validasi data (pastikan email valid, nama tidak kosong, dll.)
-		//    - Kirim email notifikasi
-		//    - Simpan ke database
-		//    - dll.
+	if botToken == "" || chatID == "" {
+		fmt.Println("Error: Variabel Telegram belum diset")
+		return c.Redirect("/contact?error=true")
+	}
 
-		// 4. Kirim respons kembali ke pengguna
-		//    Contoh: Redirect ke halaman terima kasih
-		//    return c.Redirect("/thank-you")
+	// Buat pesan yang akan dikirim ke Telegram
+	// Kita menggunakan format mirip Markdown agar teksnya tebal
+	var sb strings.Builder
+	sb.WriteString("🔔 *Pesan Baru dari Website Maunguli* 🔔\n\n")
+	sb.WriteString(fmt.Sprintf("*Nama:* %s\n", name))
+	sb.WriteString(fmt.Sprintf("*Email:* %s\n", email))
+	sb.WriteString(fmt.Sprintf("*Subjek:* %s\n\n", subject))
+	sb.WriteString(fmt.Sprintf("*Pesan:*\n%s", message))
 
-		//    Contoh: Kirim pesan sukses sederhana
-		return c.SendString("Pesan Anda telah diterima!")
+	pesanTerkirim := sb.String()
 
-		//    Contoh: Render halaman lain dengan pesan sukses
-		//    return c.Render("contact-success", fiber.Map{
-		//        "Title": "Pesan Terkirim",
-		//        "Year": time.Now().Year(),
-		//    }, "layouts/main")
+	// Kirim pesan ke API Telegram
+	apiURL := fmt.Sprintf("https://api.telegram.org/bot%s/sendMessage", botToken)
+
+	_, err := http.PostForm(apiURL, url.Values{
+		"chat_id":    {chatID},
+		"text":       {pesanTerkirim},
+		"parse_mode": {"Markdown"}, // Mengizinkan format tebal, miring, dll.
 	})
-	// --- Akhir Handler Form Kontak ---
 
+	if err != nil {
+		fmt.Println("Gagal mengirim pesan ke Telegram:", err)
+		return c.Redirect("/contact?error=true")
+	}
+
+	fmt.Println("Pesan berhasil dikirim ke Telegram!")
+	return c.Redirect("/contact?success=true")
+}
+
+// Pastikan fungsi pendaftaran rute ini dipanggil di main.go
+func FormContact(app *fiber.App) {
+	app.Post("/send-message", sendMessageHandler)
 }

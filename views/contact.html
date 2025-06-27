@@ -1,1 +1,46 @@
-<h1>contact</h1>
+<section class="page-header">
+    <div class="container">
+        <h1>Hubungi Kami</h1>
+    </div>
+</section>
+
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-info">
+            <h3>Informasi Kontak</h3>
+            <p>Kami siap membantu Anda dengan segala kebutuhan bangunan Anda. Jangan ragu untuk menghubungi kami melalui informasi di bawah ini atau mengisi formulir.</p>
+            <ul class="contact-details">
+                <li><strong>Alamat:</strong> Tangerang Selatan, Banten, Indonesia</li>
+                <li><strong>Telepon:</strong> <a href="tel:+6281234567890">+62 812-3456-7890</a></li>
+                <li><strong>Email:</strong> <a href="mailto:info@maunguli.com">info@maunguli.com</a></li>
+            </ul>
+        </div>
+
+        <div class="contact-form">
+            <h3>Kirim Pesan</h3>
+            <form id="contactForm" action="/send-message" method="POST">
+                <div class="form-group">
+                    <label for="name">Nama Lengkap</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Alamat Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subjek</label>
+                    <select id="subject" name="subject">
+                        <option value="Pertanyaan Umum">Pertanyaan Umum</option>
+                        <option value="Permintaan Layanan">Permintaan Layanan</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="message">Pesan Anda</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="cta-button primary">Kirim Pesan</button>
+            </form>
+        </div>
+    </div>
+</section>
