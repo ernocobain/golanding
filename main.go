@@ -54,6 +54,7 @@ func main() {
 	r.Privacy(app)
 	r.About(app)
 	r.Services(app)
+	r.Portfolio(app)
 	r.Erorr404(app)
 
 	port := os.Getenv("PORT")

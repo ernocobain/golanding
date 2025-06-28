@@ -48,12 +48,20 @@ func sendMessageHandler(c *fiber.Ctx) error {
 	})
 
 	if err != nil {
-		fmt.Println("Gagal mengirim pesan ke Telegram:", err)
-		return c.Redirect("/contact?error=true")
+		fmt.Println("Gagal mengirim pesan:", err)
+		// Kirim status error dalam format JSON
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"status":  "error",
+			"message": "Gagal mengirim pesan.",
+		})
 	}
 
-	fmt.Println("Pesan berhasil dikirim ke Telegram!")
-	return c.Redirect("/contact?success=true")
+	fmt.Println("Pesan berhasil dikirim!")
+	// Kirim status sukses dalam format JSON
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"status":  "success",
+		"message": "Pesan berhasil terkirim!",
+	})
 }
 
 // Pastikan fungsi pendaftaran rute ini dipanggil di main.go

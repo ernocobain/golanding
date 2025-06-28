@@ -381,6 +381,29 @@ body.no-scroll {
   color: var(--text-dark); /* Ganti warna teks agar terbaca */
 }
 
+.cta-button-small {
+  display: inline-block;
+  padding: 8px 18px; /* Lebih kecil dari tombol utama */
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem; /* Font lebih kecil */
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  align-self: flex-start; /* Agar rata kiri di dalam flex container */
+
+  /* Gaya default: outline oranye */
+  background-color: transparent;
+  color: var(--primary-orange);
+  border: 1px solid var(--primary-orange);
+}
+
+.cta-button-small:hover {
+  background-color: var(--primary-orange);
+  color: var(--white);
+  transform: translateY(-2px);
+}
 /* --- Scroll Indicator --- */
 /* =============================================== */
 /* --- STYLE FINAL: SCROLL INDICATOR (VERSI PUTIH) --- */
@@ -444,4 +467,28 @@ body.no-scroll {
   0% { opacity: 1; transform: translateY(0) translateX(-50%); }
   50% { opacity: 1; transform: translateY(18px) translateX(-50%); }
   100% { opacity: 0; transform: translateY(18px) translateX(-50%); }
+}
+
+/* Contact Form */
+
+#form-feedback {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: none; /* Sembunyi secara default */
+}
+
+#form-feedback.success {
+    display: block;
+    background-color: #d1fae5; /* Hijau muda */
+    color: #065f46; /* Hijau tua */
+    border: 1px solid #6ee7b7;
+}
+
+#form-feedback.error {
+    display: block;
+    background-color: #fee2e2; /* Merah muda */
+    color: #b91c1c; /* Merah tua */
+    border: 1px solid #fca5a5;
 }

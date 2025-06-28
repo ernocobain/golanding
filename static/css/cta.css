@@ -1,17 +1,16 @@
-/* Ganti seluruh CSS cta.css Anda dengan ini */
+/* /static/css/cta.css (VERSI FINAL & BENAR) */
 
-/* -- Bagian Call to Action (CTA) (Versi Revisi) -- */
-
-/* Selector diperbaiki dari #contact-cta menjadi #cta */
+/* --- STYLE DASAR (DEFAULT = VERSI GELAP) --- */
 #cta {
     padding: 80px 1rem;
     text-align: center;
-    position: relative; /* Diperlukan untuk pseudo-element overlay */
-    background-color: var(--text-dark); /* Fallback jika gambar gagal dimuat */
-    overflow: hidden; /* Agar pseudo-element tidak keluar */
+    position: relative;
+    overflow: hidden;
+    background-color: var(--text-dark); /* Latar default adalah gelap */
+    transition: background-color 0.3s ease; /* Transisi untuk smooth change */
 }
 
-/* Membuat latar belakang dengan gambar tekstur + lapisan warna gelap */
+/* Tekstur untuk versi gelap */
 #cta::before {
     content: '';
     position: absolute;
@@ -19,58 +18,61 @@
     left: 0;
     width: 100%;
     height: 100%;
-    /* Ganti URL gambar dengan tekstur yang Anda suka, misalnya blueprint atau dinding beton */
-    background-image: url('https://www.transparenttextures.com/patterns/concrete-wall.png');
-    background-size: auto;
-    background-repeat: repeat;
-    opacity: 0.05; /* Buat tekstur sangat halus */
     z-index: 1;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40"><g fill-rule="evenodd"><g fill="%23ffffff" fill-opacity="1"><path d="M0 38.59l2.83-2.83 1.41 1.41L1.41 40H0v-1.41zM0 1.4l2.83 2.83 1.41-1.41L1.41 0H0v1.41zM38.59 40l-2.83-2.83 1.41-1.41L40 38.59V40h-1.41zM40 1.41l-2.83 2.83-1.41-1.41L38.59 0H40v1.41z"/></g></g></svg>');
+    opacity: 0.04;
 }
 
 .cta-content {
     max-width: 800px;
     margin: 0 auto;
-    position: relative; /* Pastikan konten di atas overlay */
+    position: relative;
     z-index: 2;
 }
 
-.cta-content h2 {
+/* Teks default untuk versi gelap */
+#cta .cta-content h2 {
+    color: var(--white);
     font-size: 2.8rem;
     font-weight: 700;
     margin-bottom: 20px;
-    color: var(--white); /* Teks putih di atas background gelap */
 }
 
-.cta-content p {
+#cta .cta-content p {
+    color: #e5e7eb; /* Putih gading */
     font-size: 1.2rem;
     margin-bottom: 40px;
     line-height: 1.7;
-    color: #e5e7eb; /* Warna putih gading agar lebih lembut */
-    max-width: 600px; /* Batasi lebar paragraf agar mudah dibaca */
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
 }
 
-/* Tombol CTA dibuat konsisten dengan tombol utama di Hero & Portfolio */
-.cta-content .cta-button {
-    background-color: var(--primary-orange);
-    color: var(--white);
-    border: 2px solid var(--primary-orange);
-    padding: 1rem 2.2rem;
-    border-radius: 50px;
-    font-size: 1.1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 20px rgba(249, 115, 22, 0.3); /* Bayangan oranye */
+
+/* --- VARIASI VERSI TERANG (OVERRIDE STYLES) --- */
+/* Style ini hanya aktif jika section memiliki id #cta DAN kelas .cta-light */
+
+#cta.cta-light {
+    background-color: var(--background-light); /* Ganti background menjadi terang */
+    background-image: none; /* Hapus background image */
 }
 
-.cta-content .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 7px 25px rgba(249, 115, 22, 0.4);
+#cta.cta-light::before {
+    display: none; /* Sembunyikan tekstur */
 }
 
-/* --- Bagian Responsif --- */
+#cta.cta-light .cta-content h2 {
+    color: var(--text-dark); /* Ganti teks menjadi gelap */
+}
+
+#cta.cta-light .cta-content p {
+    color: var(--text-subtle); /* Ganti teks menjadi abu-abu */
+}
+
+/* Tombol di versi terang tetap menggunakan .primary, jadi tidak perlu CSS tambahan */
+
+
+/* --- Responsif --- */
 @media (max-width: 768px) {
     #cta {
         padding: 60px 1rem;

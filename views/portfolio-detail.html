@@ -1,0 +1,54 @@
+<section class="project-hero" style="background-image: url('{{ .HeroImage }}');">
+    <div class="project-hero-content">
+        <div class="container">
+            <h1>{{ .ProjectTitle }}</h1>
+        </div>
+    </div>
+</section>
+
+<section class="project-details-section">
+    <div class="container">
+        <div class="project-overview">
+            <div class="project-description">
+                <h2>Ringkasan Proyek</h2>
+                <p>Ini adalah deskripsi detail tentang proyek. Anda bisa menceritakan permintaan awal klien, tantangan yang dihadapi (misalnya ruang terbatas atau budget), dan bagaimana tim Maunguli memberikan solusi cerdas untuk mencapai hasil akhir yang memuaskan.</p>
+                <p>Fokus pada bagaimana Anda memberikan nilai lebih, seperti ketepatan waktu, kerapian kerja, atau pemilihan material yang efisien.</p>
+            </div>
+            <div class="project-facts">
+                <h3>Detail</h3>
+                <ul>
+                    <li><strong>Klien:</strong> {{ .Client }}</li>
+                    <li><strong>Lokasi:</strong> {{ .Location }}</li>
+                    <li><strong>Durasi:</strong> {{ .Duration }}</li>
+                    <li><strong>Layanan:</strong> {{ .Services }}</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="project-gallery">
+            <h2>Galeri Hasil Kerja</h2>
+            <div class="gallery-grid">
+                {{ range .Images }}
+                <a href="{{ . }}" class="gallery-item">
+                    <img src="{{ . }}" alt="Foto proyek {{ $.ProjectTitle }}" loading="lazy">
+                </a>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="project-testimonial">
+            <blockquote>
+                <p>"{{ .Testimonial }}"</p>
+                <footer>— {{ .Client }}, {{ .Location }}</footer>
+            </blockquote>
+        </div>
+
+    </div>
+</section>
+
+<section class="project-cta">
+    <div class="container">
+        <h2>Punya Proyek Serupa?</h2>
+        <a href="/contact" class="cta-button primary">Diskusikan dengan Kami</a>
+    </div>
+</section>

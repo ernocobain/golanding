@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupActiveNavLinks();
     setupStickyHeader();
     setupHeroScrollIndicator();
+    setupContactForm();
 });
 
 /**
@@ -199,5 +200,62 @@ function setupHeroScrollIndicator() {
             window.requestAnimationFrame(handleScroll);
             ticking = true;
         }
+    });
+}
+
+// /static/js/index.js
+
+/**
+ * Mengatur pengiriman form kontak menggunakan Fetch API (AJAX)
+ */
+function setupContactForm() {
+    const contactForm = document.getElementById('contactForm');
+    if (!contactForm) return;
+
+    const feedbackDiv = document.getElementById('form-feedback');
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+
+    contactForm.addEventListener('submit', function (event) {
+        // 1. Mencegah form dikirim secara normal
+        event.preventDefault();
+
+        // Simpan teks asli tombol dan tampilkan status loading
+        const originalButtonText = submitButton.textContent;
+        submitButton.disabled = true;
+        submitButton.textContent = 'Mengirim...';
+
+        // Sembunyikan pesan feedback sebelumnya
+        feedbackDiv.style.display = 'none';
+        feedbackDiv.className = '';
+
+        // 2. Kumpulkan data form
+        const formData = new FormData(contactForm);
+
+        // 3. Kirim data menggunakan Fetch API
+        fetch('/send-message', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => response.json())
+        .then(data => {
+            // 4. Tampilkan pesan berdasarkan response dari server
+            if (data.status === 'success') {
+                feedbackDiv.className = 'success';
+                feedbackDiv.textContent = 'Terima kasih! Pesan Anda telah berhasil terkirim.';
+                contactForm.reset(); // Kosongkan form
+            } else {
+                throw new Error(data.message || 'Terjadi kesalahan.');
+            }
+        })
+        .catch(error => {
+            feedbackDiv.className = 'error';
+            feedbackDiv.textContent = 'Maaf, terjadi kesalahan saat mengirim pesan. Silakan coba lagi.';
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Kembalikan tombol ke keadaan semula
+            submitButton.disabled = false;
+            submitButton.textContent = originalButtonText;
+        });
     });
 }

@@ -1,21 +1,48 @@
-<main>
-    <section>
-        <h2>What We Offer</h2>
-        <p>We provide a range of services to meet your needs. Here are some of our key offerings:</p>
+<section class="page-header">
+    <div class="container">
+        <h1>Layanan Profesional Kami</h1>
+        <p>Solusi lengkap untuk semua kebutuhan konstruksi dan renovasi Anda, dikerjakan oleh tim yang ahli di bidangnya.</p>
+    </div>
+</section>
 
-        <div class="service-list">
-            <div class="service-item">
-                <h3>Service 1</h3>
-                <p>Description of Service 1. This could include key features, benefits, and target audience.</p>
-            </div>
-            <div class="service-item">
-                <h3>Service 2</h3>
-                <p>Description of Service 2. This could include key features, benefits, and target audience.</p>
-            </div>
-            <div class="service-item">
-                <h3>Service 3</h3>
-                <p>Description of Service 3. This could include key features, benefits, and target audience.</p>
-            </div>
-        </div>
-    </section>
-</main>
+<section class="service-gallery-section">
+    <div class="container">
+        <div class="service-grid">
+            <a href="/services/bangun-rumah" class="service-card" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059ee41F?q=80&w=1973&auto=format&fit=crop');">
+                <div class="service-card-content">
+                    <div class="service-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16"/><path d="m2 10 10-9 10 9v10H2V10z"/><path d="M9.5 22V10h5v12"/></svg>
+                    </div>
+                    <h3>Bangun Rumah dari Nol</h3>
+                    <p>Wujudkan rumah impian Anda bersama kami, dari desain hingga serah terima kunci.</p>
+                </div>
+            </a>
+            <a href="/services/renovasi" class="service-card" style="background-image: url('https://images.unsplash.com/photo-1600585153492-514a76a4a82c?q=80&w=2070&auto=format&fit=crop');">
+                 <div class="service-card-content">
+                    <div class="service-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 10 4 4-4 4"/><path d="m6 10-4 4 4 4"/><path d="m14.5 2-3 20"/><path d="m9.5 22 3-20"/></svg>
+                    </div>
+                    <h3>Renovasi Total & Parsial</h3>
+                    <p>Segarkan kembali tampilan rumah Anda, dari renovasi dapur, kamar mandi, hingga seluruh bangunan.</p>
+                </div>
+            </a>
+            <a href="/services/pasang-granit" class="service-card" style="background-image: url('https://images.unsplash.com/photo-1603957865954-d877c2814f8a?q=80&w=1974&auto=format&fit=crop');">
+                 <div class="service-card-content">
+                    <div class="service-card-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 10.5c.92.54 1.5 1.14 1.5 2.5s-.58 2-1.5 2.5"/><path d="M15.5 10.5c-.92.54-1.5 1.14-1.5 2.5s.58 2 1.5 2.5"/><path d="M2 15.5V14a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v1.5"/><path d="M2 8.5V10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8.5"/><path d="M12 2v20"/></svg>
+                    </div>
+                    <h3>Pemasangan Granit & Keramik</h3>
+                    <p>Hasil pemasangan presisi dan rapi untuk lantai, dinding, dan meja dapur yang mewah dan tahan lama.</p>
+                </div>
+            </a>
+             </div>
+    </div>
+</section>
+
+<div class="lazy-section" data-css="/static/css/process.css">
+    {{ template "components/home/process" . }}
+</div>
+
+<section id="cta" class="lazy-section cta-light" data-css="/static/css/cta.css">
+    {{ template "components/home/cta" . }}
+</section>
