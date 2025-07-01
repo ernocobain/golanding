@@ -116,6 +116,6 @@ func serviceDetailHandler(c *fiber.Ctx) error {
 		"Description":     service.Description,
 		"Benefits":        service.Benefits,
 		"RelatedProjects": relatedProjects,
-		"YoutubeVideoID":  service.YouTubeVideoID,
+		"YouTubeVideoID":  service.YouTubeVideoID,
 	})
 }

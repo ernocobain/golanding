@@ -1,3 +1,4 @@
+// File: main.go (PENDEKATAN TERAKHIR)
 package main
 
 import (
@@ -5,7 +6,6 @@ import (
 	"os"
 
 	m "github/dhikrama/go/src"
-	// md "github/dhikrama/go/src/midelwares"
 	r "github/dhikrama/go/src/routes"
 
 	"github.com/gofiber/fiber/v2"
@@ -16,35 +16,35 @@ import (
 
 func main() {
 	r.InitFirestore()
-	// Create a new engine
-	engine := html.New("./views", ".html")
 
+	engine := html.New("./views", ".html")
 	engine.Reload(true)
 
 	app := fiber.New(fiber.Config{
 		ViewsLayout: "layouts/main",
-		// Prefork:              true,
-		Views: engine,
-		// CompressedFileSuffix: ".gz",
+		Views:       engine,
 	})
-	app.Use(compress.New(
-		compress.Config{
-			Level: compress.LevelBestSpeed,
-		},
-	))
 
+	app.Use(compress.New(compress.Config{
+		Level: compress.LevelBestSpeed,
+	}))
+
+	// --- PENDEKATAN BARU UNTUK CSP ---
+	// Definisikan string CSP di sini
+	var csp = "default-src 'self'; " +
+		"script-src 'self' 'unsafe-inline'; " +
+		"style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
+		"font-src 'self' fonts.gstatic.com; " +
+		"img-src 'self' data: i.pravatar.cc images.unsplash.com www.transparenttextures.com https://placehold.co; " +
+		"frame-src 'self' www.youtube.com;"
+
+	// Masukkan variabel CSP ke dalam config
 	app.Use(helmet.New(helmet.Config{
-		// Konfigurasi lain tetap sama
-		HSTSMaxAge:            300,
-		HSTSExcludeSubdomains: true,
-		XSSProtection:         "0",
-		XFrameOptions:         "SAMEORIGIN",
-
-		ContentSecurityPolicy: "default-src 'self'; " +
-			"script-src 'self' 'unsafe-inline'; " +
-			"style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
-			"font-src 'self' fonts.gstatic.com; " +
-			"img-src 'self' data: i.pravatar.cc images.unsplash.com www.transparenttextures.com https://placehold.co;",
+		XSSProtection:             "0",
+		XFrameOptions:             "SAMEORIGIN",
+		HSTSMaxAge:                300,
+		HSTSExcludeSubdomains:     true,
+		ContentSecurityPolicy:     csp, // <-- Menggunakan variabel
 		CrossOriginOpenerPolicy:   "unsafe-none",
 		CrossOriginEmbedderPolicy: "unsafe-none",
 	}))
@@ -65,6 +65,5 @@ func main() {
 	if port == "" {
 		port = "8080"
 	}
-
 	log.Fatal(app.Listen(":" + port))
 }
