@@ -1,0 +1,79 @@
+<section class="service-hero" style="background-image: url('{{ .HeroImage }}');">
+    <div class="service-hero-content">
+        <div class="container">
+            <p class="service-hero-breadcrumb"><a href="/services">Layanan</a> / {{ .ServiceName }}</p>
+            <h1>{{ .ServiceName }}</h1>
+            <p class="service-hero-subtitle">{{ .ServiceSubtitle }}</p>
+        </div>
+    </div>
+</section>
+
+<section class="service-content-section">
+    <div class="container service-layout">
+        <div class="service-main-content">
+            <h2>Tentang Layanan Ini</h2>
+            <p>{{ .Description }}</p>
+
+            {{ if .YouTubeVideoID }}
+            <div class="service-video-wrapper">
+                <iframe src="https://www.youtube.com/embed/{{ .YouTubeVideoID }}" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            {{ end }}
+
+            {{ if .Benefits }}
+            <h3>Keunggulan Layanan Kami</h3>
+            <ul class="service-benefits">
+                {{ range .Benefits }}
+                <li>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                    <span>{{ . }}</span>
+                </li>
+                {{ end }}
+            </ul>
+            {{ end }}
+        </div>
+
+        <aside class="service-sidebar">
+            <div class="sidebar-cta">
+                <h4>Punya Pertanyaan?</h4>
+                <p>Diskusikan kebutuhan spesifik Anda dengan tim kami.</p>
+                <a href="/contact" class="cta-button primary">Konsultasi Sekarang</a>
+            </div>
+        </aside>
+    </div>
+</section>
+
+{{ if .RelatedProjects }}
+<section class="related-work-section">
+    <div class="container">
+        <h2>Hasil Kerja Terkait</h2>
+        <div class="portfolio-grid">
+            {{ range .RelatedProjects }}
+            <div class="portfolio-item">
+                <a href="/portfolio/{{ .Slug }}" class="portfolio-image-wrapper">
+                    <img src="{{ .HeroImage }}" alt="{{ .ProjectTitle }}" loading="lazy">
+                    <div class="portfolio-overlay">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                            <circle cx="12" cy="12" r="3" />
+                        </svg>
+                    </div>
+                </a>
+                <div class="portfolio-info">
+                    <h3><a href="/portfolio/{{ .Slug }}">{{ .ProjectTitle }}</a></h3>
+                    <p>{{ .Services }}</p>
+                </div>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+</section>
+{{ end }}

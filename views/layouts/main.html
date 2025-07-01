@@ -16,7 +16,6 @@
 
     {{ template "partials/header" .}}
 
-    {{/* Cek apakah ada variabel PageCSS yang dikirim dari handler Go */}}
     {{ if .PageCSS }}
     <div class="lazy-section" data-css="{{ .PageCSS }}">
       {{ embed }}

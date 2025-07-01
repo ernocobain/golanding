@@ -15,8 +15,11 @@ import (
 )
 
 func main() {
+	r.InitFirestore()
 	// Create a new engine
 	engine := html.New("./views", ".html")
+
+	engine.Reload(true)
 
 	app := fiber.New(fiber.Config{
 		ViewsLayout: "layouts/main",
@@ -55,6 +58,7 @@ func main() {
 	r.About(app)
 	r.Services(app)
 	r.Portfolio(app)
+	r.ServicesDetail(app)
 	r.Erorr404(app)
 
 	port := os.Getenv("PORT")
