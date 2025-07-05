@@ -10,6 +10,7 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/helmet"
 	"github.com/gofiber/template/html/v2"
 )
@@ -24,6 +25,13 @@ func main() {
 		ViewsLayout: "layouts/main",
 		Views:       engine,
 	})
+
+	app.Use(cors.New(cors.Config{
+		// Izinkan domain spesifik. Pisahkan dengan koma.
+		// Ini mengizinkan blog Anda dan server pengembangan lokal.
+		AllowOrigins: "https://blog.maunguli.com",
+		AllowHeaders: "Origin, Content-Type, Accept",
+	}))
 
 	app.Use(compress.New(compress.Config{
 		Level: compress.LevelBestSpeed,
