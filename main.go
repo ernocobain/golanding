@@ -49,7 +49,7 @@ func main() {
 		CrossOriginEmbedderPolicy: "unsafe-none",
 	}))
 
-	app.Static("/static", "./static")
+	app.Static("/static", "./public/static")
 
 	r.Index(app)
 	m.FormContact(app)

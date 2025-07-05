@@ -1,0 +1,116 @@
+/* Ganti seluruh CSS about.css Anda dengan ini */
+
+/* -- Bagian Tentang Kami (Versi Revisi) -- */
+#about {
+    padding: 80px 1rem;
+    background-color: var(--white); /* Latar belakang bersih */
+}
+
+.about-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px; /* Jarak antara gambar dan teks */
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 80px; /* Jarak ke bagian tim */
+}
+
+.about-image {
+    flex: 1 1 400px; /* Aturan flexbox yang lebih modern */
+}
+
+.about-image img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-text {
+    flex: 1 1 500px;
+}
+
+.about-text h2 {
+    margin-bottom: 20px;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.about-text p {
+    margin-bottom: 20px;
+    line-height: 1.7;
+    font-size: 1.1rem;
+    color: var(--text-subtle);
+}
+
+/* Link di dalam paragraf */
+.about-text .inline-link {
+    color: var(--primary-orange);
+    text-decoration: underline;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.about-text .inline-link:hover {
+    opacity: 0.8;
+}
+
+
+/* --- Bagian Tim --- */
+.team-section {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.team-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 40px;
+}
+
+.team-members {
+    display: flex; /* Ganti dari inline-block ke flexbox */
+    flex-wrap: wrap;
+    justify-content: center; /* Pusatkan anggota tim */
+    gap: 40px; /* Jarak antar anggota tim */
+}
+
+.team-member {
+    text-align: center;
+    max-width: 150px; /* Batasi lebar agar tidak terlalu besar */
+}
+
+.team-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+    object-fit: cover;
+    border: 4px solid var(--primary-orange); /* Aksen brand pada avatar! */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.team-member h4 {
+    margin: 0 0 5px 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.team-member p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-subtle);
+}
+
+/* --- Bagian Responsif --- */
+@media (max-width: 768px) {
+    .about-content {
+        gap: 30px;
+        margin-bottom: 60px;
+    }
+    .about-text h2 {
+        font-size: 2rem;
+    }
+}

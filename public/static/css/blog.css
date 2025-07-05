@@ -1,0 +1,140 @@
+/* Ganti seluruh CSS blog.css Anda dengan ini */
+
+/* -- Bagian Blog (Versi Revisi) -- */
+#blog {
+    padding: 80px 1rem;
+    background-color: var(--background-light);
+}
+
+#blog h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 15px;
+}
+
+/* Menggunakan kembali style subjudul dari bagian lain */
+#blog .section-subtitle {
+    text-align: center;
+    font-size: 1.1rem;
+    color: var(--text-subtle);
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Grid Blog */
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Kartu Blog */
+.blog-card {
+    background-color: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e2e8f0; /* Border halus */
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Gambar Blog */
+.blog-image-link {
+    display: block; /* Agar link mengisi area gambar */
+    height: 200px;
+}
+
+.blog-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Konten Kartu */
+.blog-card-content {
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1; /* Pastikan konten mengisi sisa ruang kartu */
+}
+
+/* Meta Info (Baru) */
+.blog-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+    color: var(--text-subtle);
+}
+
+.blog-category {
+    background-color: #FFF7ED; /* Latar oranye pucat */
+    color: var(--primary-orange);
+    padding: 4px 10px;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.blog-title {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+/* Judul dibuat menjadi link agar lebih SEO friendly */
+.blog-title a {
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: color 0.3s ease;
+}
+
+.blog-title a:hover {
+    color: var(--primary-orange);
+}
+
+
+.blog-excerpt {
+    color: var(--text-subtle);
+    line-height: 1.6;
+    font-size: 1rem;
+    flex-grow: 1; /* Dorong 'Read More' ke bawah */
+    margin-bottom: 20px;
+}
+
+/* Link "Read More" */
+.blog-read-more {
+    display: inline-block;
+    color: var(--primary-orange);
+    text-decoration: none;
+    font-weight: 600;
+    transition: transform 0.3s ease;
+    align-self: flex-start; /* Rata kiri */
+}
+
+.blog-read-more:hover {
+    transform: translateX(5px); /* Efek geser ke kanan */
+}
+
+
+/* --- Bagian Responsif (Sudah bagus) --- */
+@media (max-width: 768px) {
+    #blog h2 {
+        font-size: 2rem;
+    }
+}

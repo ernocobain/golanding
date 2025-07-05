@@ -1,0 +1,89 @@
+/* Ganti seluruh CSS faqs.css Anda dengan ini */
+
+/* -- Bagian FAQ (Versi Revisi) -- */
+.faq-section {
+    padding: 80px 1rem;
+    max-width: 800px; /* Sedikit perlebar untuk kenyamanan baca */
+    margin: auto;
+    background-color: var(--background-light);
+}
+
+.faq-title {
+    text-align: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 50px;
+}
+
+.faq-item {
+    border-bottom: 1px solid #e2e8f0; /* Garis pemisah antar pertanyaan */
+    margin-bottom: 0;
+}
+
+.faq-item:first-child {
+    border-top: 1px solid #e2e8f0;
+}
+
+.faq-question {
+    background: transparent; /* Hilangkan background solid */
+    color: var(--text-dark); /* Gunakan warna teks utama */
+    border: none;
+    padding: 20px 0; /* Atur padding vertikal, hilangkan horizontal */
+    width: 100%;
+    text-align: left;
+    font-size: 1.1rem;
+    font-weight: 600; /* Buat pertanyaan lebih tebal */
+    cursor: pointer;
+    border-radius: 0; /* Hilangkan border-radius */
+    box-shadow: none; /* Hilangkan shadow */
+    transition: color 0.3s ease;
+    display: flex; /* Gunakan flexbox untuk alignment */
+    justify-content: space-between;
+    align-items: center;
+}
+
+.faq-question:hover {
+    color: var(--primary-orange); /* Ganti warna teks saat hover */
+}
+
+/* --- Ikon Plus / Cross --- */
+.faq-question::after {
+    content: '+'; /* Ikon plus secara default */
+    font-size: 1.8rem;
+    font-weight: 300; /* Buat ikon lebih tipis */
+    color: var(--primary-orange);
+    transition: transform 0.3s ease;
+    margin-left: 1rem;
+}
+
+.faq-question.active::after {
+    content: '×'; /* Ganti menjadi 'x' saat aktif */
+    transform: rotate(180deg); /* Animasi putar */
+}
+
+/* --- Jawaban Accordion --- */
+.faq-answer {
+    /* Sembunyikan dengan max-height: 0 dan overflow: hidden */
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease-out, padding 0.4s ease-out; /* Animasi halus */
+    background-color: transparent; /* Hilangkan background */
+    box-shadow: none;
+    padding: 0; /* Hilangkan padding saat tertutup */
+    border-radius: 0;
+}
+
+.faq-answer p {
+    margin: 0;
+    padding: 0 1rem 20px 0; /* Padding untuk konten jawaban */
+    font-size: 1rem;
+    color: var(--text-subtle);
+    line-height: 1.7;
+}
+
+/* Style untuk jawaban saat terbuka */
+.faq-question.active + .faq-answer {
+    /* `display: block` tidak diperlukan lagi */
+    padding: 0; /* Atur padding di paragrafnya saja */
+}

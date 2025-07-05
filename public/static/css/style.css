@@ -1,0 +1,662 @@
+/* =============================================== */
+/* STYLE.CSS (MEMULAI DARI NOL)                */
+/* =============================================== */
+
+/* -- 1. FONDASI & VARIABEL -- */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+:root {
+  --primary-orange: #F97316;
+  --text-dark: #1F2937;
+  --text-subtle: #6B7280;
+  --background-light: #F9FAFB;
+  --white: #FFFFFF;
+  --border-color: #e5e7eb;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  margin: 0;
+  padding: 0;
+  /* Mencegah horizontal scroll (jika ada) */
+  overflow-x: hidden;
+}
+
+.page-wrapper {
+  position: relative;
+  /* Diperlukan agar overflow bekerja dengan baik */
+  width: 100%;
+  overflow-x: hidden;
+  /* INI KUNCI UTAMANYA */
+}
+
+body.no-scroll {
+  overflow-y: hidden;
+  /* Mencegah scroll saat menu mobile terbuka */
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  /* Padding horizontal saja */
+}
+
+/* -- 2. HEADER & NAVIGASI -- */
+.header {
+  position: relative;
+  /* Defaultnya tidak menempel */
+  z-index: 1001;
+  width: 100%;
+  background-color: var(--white);
+
+  /* Persiapan untuk animasi slide-down */
+  transform: translateY(0);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.header-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  /* Ubah padding dari 1rem menjadi 1rem untuk atas/bawah, dan 1.5rem untuk kiri/kanan */
+  padding: .2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* -- Style untuk Header saat di-scroll (is-scrolled) -- */
+.header.is-scrolled {
+  /* Membuat header menempel di atas layar */
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  /* Tambahkan bayangan yang lebih jelas agar terlihat 'melayang' */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+
+  /* Animasi slide-down yang elegan */
+  transform: translateY(0);
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Keyframes untuk animasi slide-down */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+.logo img {
+  max-width: 160px;
+  height: auto;
+  display: block;
+}
+
+/* -- DEFAULT: TAMPILAN MOBILE -- */
+.burger {
+  display: flex;
+  /* Terlihat di mobile */
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  z-index: 101;
+}
+
+.burger span {
+  display: block;
+  width: 100%;
+  height: 3px;
+  background-color: var(--text-dark);
+  border-radius: 3px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animasi Hamburger -> X */
+.burger.is-active span:nth-child(1) {
+  transform: translateY(9.5px) rotate(45deg);
+}
+
+.burger.is-active span:nth-child(2) {
+  opacity: 0;
+}
+
+.burger.is-active span:nth-child(3) {
+  transform: translateY(-9.5px) rotate(-45deg);
+}
+
+/* Navigasi (tersembunyi di mobile) */
+.nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 280px;
+  height: 100vh;
+  background-color: var(--white);
+  padding: 6rem 2rem;
+  transform: translateX(100%);
+  transition: transform 0.4s ease-in-out;
+  z-index: 100;
+}
+
+.nav.is-active {
+  transform: translateX(0);
+}
+
+.nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-list a {
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Overlay */
+.nav-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s ease, visibility 0s 0.4s;
+  z-index: 99;
+}
+
+.nav-overlay.is-active {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s ease;
+}
+
+
+/* -- TAMPILAN DESKTOP (> 768px) -- */
+@media (min-width: 769px) {
+
+  .burger,
+  .nav-overlay {
+    display: none;
+    /* Sembunyikan hamburger & overlay */
+  }
+
+  .nav {
+    position: static;
+    /* Kembalikan ke posisi normal */
+    width: auto;
+    height: auto;
+    background-color: transparent;
+    padding: 0;
+    transform: none;
+    /* Hapus transform */
+  }
+
+  .nav-list {
+    flex-direction: row;
+    /* Buat jadi horizontal */
+    gap: 2rem;
+  }
+
+  /* Di dalam style.css, di dalam media query desktop */
+  @media (min-width: 769px) {
+    /* ... style desktop lain ... */
+
+    .nav-list a {
+      font-size: 1rem;
+      position: relative;
+      /* Diperlukan untuk garis bawah */
+      padding-bottom: 5px;
+      /* Beri ruang untuk garis bawah */
+    }
+
+    .nav-list a:hover {
+      color: var(--primary-orange);
+    }
+
+    /* --- STYLE BARU UNTUK LINK AKTIF --- */
+    .nav-item.is-active a {
+      color: var(--primary-orange);
+      font-weight: 700;
+      /* Buat sedikit lebih tebal */
+    }
+
+    /* Membuat garis bawah animasi */
+    .nav-item.is-active a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primary-orange);
+      border-radius: 2px;
+    }
+  }
+}
+
+/* =============================================== */
+/* HERO SECTION                                    */
+/* =============================================== */
+
+/* Ganti/tambahkan pada style .hero Anda di style.css */
+
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+
+    /* DEFAULT (MOBILE): Menggunakan gambar B (mobile) */
+    background-image: url('/static/images/bangunan-pasraman-bekasi-mobile.jpg'); 
+
+    background-size: cover;
+    background-position: center;
+}
+
+/* ... (style .hero::before untuk overlay dan .hero-container tetap sama) ... */
+
+
+/* TAMPILAN DESKTOP (Layar > 768px) */
+@media (min-width: 769px) {
+    /* GANTI dengan gambar A (desktop) di sini */
+    .hero {
+        background-image: url('/static/images/bangunan-pasraman-bekasi.jpg'); /* <-- Ganti dengan nama file gambar desktop Anda */
+    }
+
+    /* ... (sisa style desktop lainnya seperti text-align, dll) ... */
+}
+
+/* Lapisan Overlay Gelap */
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(29, 41, 55, 0.8), rgba(29, 41, 55, 0.4));
+  z-index: 1;
+}
+
+/* Kontainer Konten Hero */
+.hero-container {
+  position: relative; /* Pastikan konten di atas overlay */
+  z-index: 2;
+  text-align: center;
+  max-width: 800px;
+}
+
+.hero-title {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  margin: 0 0 1rem 0;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #e5e7eb; /* Putih gading */
+  line-height: 1.7;
+  margin: 0 0 2.5rem 0;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap; /* Agar tombol turun jika layar terlalu sempit */
+}
+
+/* =============================================== */
+/* KOMPONEN TOMBOL GLOBAL                      */
+/* =============================================== */
+
+/* Style Dasar untuk SEMUA elemen .cta-button */
+.cta-button {
+  display: inline-block;
+  padding: 0.9rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid transparent; /* Border dasar transparan */
+  cursor: pointer;
+}
+
+/* Modifier untuk Tombol Utama (Oranye Solid) */
+.cta-button.primary {
+  background-color: var(--primary-orange);
+  border-color: var(--primary-orange);
+  color: var(--white);
+}
+
+/* Modifier untuk Tombol Sekunder (Outline Putih) */
+.cta-button.secondary {
+  background-color: transparent;
+  border-color: var(--white);
+  color: var(--white);
+}
+
+/* Efek Hover Umum */
+.cta-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Efek Hover Khusus untuk Tombol Sekunder */
+.cta-button.secondary:hover {
+  background-color: var(--white);
+  color: var(--text-dark); /* Ganti warna teks agar terbaca */
+}
+
+.cta-button-small {
+  display: inline-block;
+  padding: 8px 18px; /* Lebih kecil dari tombol utama */
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.9rem; /* Font lebih kecil */
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  align-self: flex-start; /* Agar rata kiri di dalam flex container */
+
+  /* Gaya default: outline oranye */
+  background-color: transparent;
+  color: var(--primary-orange);
+  border: 1px solid var(--primary-orange);
+}
+
+.cta-button-small:hover {
+  background-color: var(--primary-orange);
+  color: var(--white);
+  transform: translateY(-2px);
+}
+/* --- Scroll Indicator --- */
+/* =============================================== */
+/* --- STYLE FINAL: SCROLL INDICATOR (VERSI PUTIH) --- */
+/* =============================================== */
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 3rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  /* Properti untuk Transisi Fade Out */
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* Style untuk menyembunyikan indikator */
+.hero-scroll-indicator.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.scroll-text {
+  color: var(--white);
+  opacity: 0.8; /* Sedikit transparan agar tidak terlalu mencolok */
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+/* Bentuk 'mouse' luar */
+.scroll-icon {
+  width: 28px;
+  height: 48px;
+  border: 2px solid rgba(255, 255, 255, 0.7); /* Border putih semi-transparan */
+  border-radius: 14px;
+  position: relative;
+}
+
+/* Titik di dalam 'mouse' yang beranimasi */
+.scroll-icon::before {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  width: 6px;
+  height: 6px;
+  background-color: var(--white);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  animation: scrollAnimation 2s infinite cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+/* Animasi untuk titik scroll (tetap sama) */
+@keyframes scrollAnimation {
+  0% { opacity: 1; transform: translateY(0) translateX(-50%); }
+  50% { opacity: 1; transform: translateY(18px) translateX(-50%); }
+  100% { opacity: 0; transform: translateY(18px) translateX(-50%); }
+}
+
+/* Contact Form */
+
+#form-feedback {
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    display: none; /* Sembunyi secara default */
+}
+
+#form-feedback.success {
+    display: block;
+    background-color: #d1fae5; /* Hijau muda */
+    color: #065f46; /* Hijau tua */
+    border: 1px solid #6ee7b7;
+}
+
+#form-feedback.error {
+    display: block;
+    background-color: #fee2e2; /* Merah muda */
+    color: #b91c1c; /* Merah tua */
+    border: 1px solid #fca5a5;
+}
+
+
+
+/* -- Bagian Portofolio (Versi Revisi) -- */
+.portfolio-section {
+    padding: 80px 0;
+    background-color: var(--background-light); /* Latar belakang abu-abu sangat terang */
+    text-align: center;
+}
+
+.portfolio-section h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--text-dark);
+}
+
+.portfolio-section .section-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-subtle);
+    margin-bottom: 50px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+/* Grid Portofolio */
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Kartu Portofolio Individual */
+.portfolio-item {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bayangan sangat halus */
+    overflow: hidden;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* --- EFEK HOVER GAMBAR BARU --- */
+.portfolio-image-wrapper {
+    position: relative; /* Diperlukan untuk positioning overlay */
+    overflow: hidden; /* Agar gambar yang membesar tidak keluar */
+    height: 220px;
+}
+
+.portfolio-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease; /* Transisi untuk efek zoom */
+}
+
+.portfolio-item:hover img {
+    transform: scale(1.05); /* Efek zoom saat kartu di-hover */
+}
+
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(249, 115, 22, 0.7); /* Warna oranye transparan */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0; /* Sembunyikan secara default */
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1; /* Tampilkan saat kartu di-hover */
+}
+
+.portfolio-overlay svg {
+    width: 48px;
+    height: 48px;
+    color: var(--white);
+}
+/* --- AKHIR EFEK HOVER --- */
+
+.portfolio-info {
+    padding: 25px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.portfolio-info h3 {
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.portfolio-info p {
+    font-size: 1rem;
+    color: var(--text-subtle);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.portfolio-info .cta-button-small {
+    background-color: transparent;
+    color: var(--primary-orange);
+    border: 1px solid var(--primary-orange);
+    padding: 8px 18px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 600;
+    align-self: flex-start;
+}
+
+.portfolio-info .cta-button-small:hover {
+    background-color: var(--primary-orange);
+    color: var(--white);
+}
+
+/* Tombol CTA Utama di Bawah Grid */
+.portfolio-cta {
+    margin-top: 50px;
+}
+
+/* Samakan gaya dengan tombol CTA utama di Hero Section */
+.portfolio-cta .cta-button {
+    background-color: var(--primary-orange);
+    color: var(--white);
+    border: 2px solid var(--primary-orange);
+    padding: 0.8rem 1.8rem;
+    border-radius: 50px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.portfolio-cta .cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Bagian Responsif (Sudah bagus, tidak perlu banyak diubah) --- */
+@media (max-width: 768px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+    }
+}
