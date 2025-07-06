@@ -41,7 +41,7 @@ func main() {
 	// Definisikan string CSP di sini
 	var csp = "default-src 'self'; " +
 		"script-src 'self' 'unsafe-inline'; " +
-		"style-src 'self' 'unsafe-inline' fonts.googleapis.com; " +
+		"style-src 'self' 'unsafe-inline' fonts.googleapis.com;  " +
 		"font-src 'self' fonts.gstatic.com; " +
 		"img-src 'self' data: i.pravatar.cc images.unsplash.com www.transparenttextures.com https://placehold.co; " +
 		"frame-src 'self' www.youtube.com;"
@@ -56,6 +56,11 @@ func main() {
 		CrossOriginOpenerPolicy:   "unsafe-none",
 		CrossOriginEmbedderPolicy: "unsafe-none",
 	}))
+
+	app.Use(func(c *fiber.Ctx) error {
+		c.Set("X-Robots-Tag", "noindex, nofollow")
+		return c.Next()
+	})
 
 	app.Static("/static", "./public/static")
 
