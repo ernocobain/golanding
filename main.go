@@ -4,6 +4,7 @@ package main
 import (
 	"log"
 	"os"
+	"strings"
 
 	m "github/dhikrama/go/src"
 	r "github/dhikrama/go/src/routes"
@@ -57,8 +58,15 @@ func main() {
 		CrossOriginEmbedderPolicy: "unsafe-none",
 	}))
 
+	// Ganti middleware lama Anda dengan yang ini di main.go
+
 	app.Use(func(c *fiber.Ctx) error {
-		c.Set("X-Robots-Tag", "noindex, nofollow")
+		// Cek apakah permintaan datang langsung ke URL Cloud Run
+		if strings.Contains(c.Hostname(), ".run.app") {
+			// Jika ya, tambahkan header noindex
+			c.Set("X-Robots-Tag", "noindex, nofollow")
+		}
+		// Selalu lanjutkan ke handler berikutnya, apapun kondisinya
 		return c.Next()
 	})
 
