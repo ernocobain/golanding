@@ -20,7 +20,7 @@ WORKDIR /app
 
 COPY --from=builder /app/server .
 
-COPY --from=builder /app/static ./static
+#COPY --from=builder /app/static ./static
 COPY --from=builder /app/views ./views
 
 EXPOSE 8080
