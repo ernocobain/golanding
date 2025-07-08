@@ -42,6 +42,10 @@ func main() {
 		return template.HTML(s)
 	})
 
+	engine.AddFunc("cdn", func(path string) string {
+		return "https://cdn.maunguli.com/cdn?src=" + path
+	})
+
 	app := fiber.New(fiber.Config{
 		ViewsLayout: "layouts/main",
 		Views:       engine,
