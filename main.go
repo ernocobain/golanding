@@ -9,6 +9,8 @@ import (
 	m "github/dhikrama/go/src"
 	r "github/dhikrama/go/src/routes"
 
+	"html/template"
+
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/cors"
@@ -16,11 +18,29 @@ import (
 	"github.com/gofiber/template/html/v2"
 )
 
+func buildCSP(cdnDomains []string) string {
+	// Tambahkan domain CDN ke setiap bagian yang diperlukan
+	joinedCDN := strings.Join(cdnDomains, " ")
+
+	return strings.Join([]string{
+		"default-src 'self';",
+		"script-src 'self' 'unsafe-inline' " + joinedCDN + ";",
+		"style-src 'self' 'unsafe-inline' fonts.googleapis.com " + joinedCDN + ";",
+		"font-src 'self' fonts.gstatic.com;",
+		"img-src 'self' data: i.pravatar.cc images.unsplash.com www.transparenttextures.com https://placehold.co " + joinedCDN + ";",
+		"frame-src 'self' www.youtube.com;",
+	}, " ")
+}
+
 func main() {
 	r.InitFirestore()
 
 	engine := html.New("./views", ".html")
 	engine.Reload(true)
+
+	engine.AddFunc("safeHTML", func(s string) template.HTML {
+		return template.HTML(s)
+	})
 
 	app := fiber.New(fiber.Config{
 		ViewsLayout: "layouts/main",
@@ -37,17 +57,12 @@ func main() {
 	app.Use(compress.New(compress.Config{
 		Level: compress.LevelBestSpeed,
 	}))
+	cdnList := []string{
+		"https://cdn-maunguli.web.app",
+		"https://cdn.maunguli.com",
+	}
+	csp := buildCSP(cdnList)
 
-	// --- PENDEKATAN BARU UNTUK CSP ---
-	// Definisikan string CSP di sini
-	var csp = "default-src 'self'; " +
-		"script-src 'self' 'unsafe-inline'; " +
-		"style-src 'self' 'unsafe-inline' fonts.googleapis.com;  " +
-		"font-src 'self' fonts.gstatic.com; " +
-		"img-src 'self' data: i.pravatar.cc images.unsplash.com www.transparenttextures.com https://placehold.co; " +
-		"frame-src 'self' www.youtube.com;"
-
-	// Masukkan variabel CSP ke dalam config
 	app.Use(helmet.New(helmet.Config{
 		XSSProtection:             "0",
 		XFrameOptions:             "SAMEORIGIN",
@@ -59,18 +74,24 @@ func main() {
 	}))
 
 	// Ganti middleware lama Anda dengan yang ini di main.go
-
 	app.Use(func(c *fiber.Ctx) error {
-		// Cek apakah permintaan datang langsung ke URL Cloud Run
-		if strings.Contains(c.Hostname(), ".run.app") {
-			// Jika ya, tambahkan header noindex
+		hostname := c.Hostname()
+		accept := c.Get("Accept")
+
+		// Jika request ke URL Cloud Run langsung → noindex
+		if strings.Contains(hostname, ".run.app") {
 			c.Set("X-Robots-Tag", "noindex, nofollow")
 		}
-		// Selalu lanjutkan ke handler berikutnya, apapun kondisinya
+
+		// Jika hostname adalah cdn.maunguli.com dan request-nya bukan image
+		if strings.Contains(hostname, "cdn.maunguli.com") && !strings.HasPrefix(accept, "image/") {
+			c.Set("X-Robots-Tag", "noindex, nofollow")
+		}
+
 		return c.Next()
 	})
 
-	app.Static("/static", "./public/static")
+	app.Static("/", "./public")
 
 	r.Index(app)
 	m.FormContact(app)
@@ -80,6 +101,7 @@ func main() {
 	r.Services(app)
 	r.Portfolio(app)
 	r.ServicesDetail(app)
+	r.CdnHandler(app)
 	r.Erorr404(app)
 
 	port := os.Getenv("PORT")

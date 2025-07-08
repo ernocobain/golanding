@@ -2,12 +2,31 @@
 <html lang="id">
 
 <head>
-  <meta charset="UTF-8" />
+ <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
   <title>{{ .Title }}</title>
-  <link rel="stylesheet" href="/static/css/style.css" />
-  <link rel="icon" href="/static/pavicon.ico" type="image/x-icon" />
+  <meta name="description" content="{{ .Description }}">
+  <link rel="canonical" href="{{ .Canonical }}">
+  <link rel="icon" href="https://cdn.maunguli.com/static/pavicon.ico" type="image/x-icon" />
 
+  <meta property="og:title" content="{{ .Title }}">
+  <meta property="og:description" content="{{ .Description }}">
+  <meta property="og:image" content="{{ .Image }}">
+  <meta property="og:url" content="{{ .Canonical }}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Maunguli">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ .Title }}">
+  <meta name="twitter:description" content="{{ .Description }}">
+  <meta name="twitter:image" content="{{ .Image }}">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.maunguli.com/static/css/style.css" />
+  
 </head>
 
 <body>
@@ -27,7 +46,7 @@
     {{ template "partials/footer" .}}
 
   </div>
-  <script src="/static/js/index.js"></script>
+  <script src="https://cdn-maunguli.web.app/static/js/index.js" defer></script>
 
 </body>
 
