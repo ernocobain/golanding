@@ -101,7 +101,6 @@ func main() {
 	r.Services(app)
 	r.Portfolio(app)
 	r.ServicesDetail(app)
-	r.CdnHandler(app)
 	r.Erorr404(app)
 
 	port := os.Getenv("PORT")
