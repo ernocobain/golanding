@@ -94,6 +94,35 @@ body.no-scroll {
   align-items: center;
 }
 
+.header-container>a{
+  display: flex;
+  color: var(--text-dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-decoration: none;
+  align-items: center;
+}
+
+.header-container>a>p{
+padding-left: 5px;
+  
+}
+.reservasi{
+  display: inline-block;
+  padding: 0.3rem 0.9rem;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 03s ease;
+  text-align: center;
+  background-color: #F97316;
+}
+
+.reservasi>a{
+  color: white;
+  text-decoration: none;
+}
+
+
 /* -- Style untuk Header saat di-scroll (is-scrolled) -- */
 .header.is-scrolled {
   /* Membuat header menempel di atas layar */
@@ -121,14 +150,14 @@ body.no-scroll {
 }
 
 .logo img {
-  max-width: 160px;
+  max-width: 50px;
   height: auto;
   display: block;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 50px) {
   .logo img {
-    max-width: 130px;
+    max-width: 47px;
   }
 }
 

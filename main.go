@@ -43,7 +43,9 @@ func main() {
 	})
 
 	engine.AddFunc("cdn", func(path string) string {
-		return "https://cdn.maunguli.com/cdn?src=" + path
+		clean := strings.TrimPrefix(path, "/")
+		url := "https://cdn.maunguli.com/cdn?src=" + clean + "&format=webp"
+		return url
 	})
 
 	app := fiber.New(fiber.Config{
